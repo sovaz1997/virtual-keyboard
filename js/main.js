@@ -1,9 +1,11 @@
 const body = document.querySelector('body');
 
 class KeyState {
-  constructor(def, onShift) {
+  constructor(def, onShift, ruDef, ruOnShift) {
     this.def = def;
     this.onShift = onShift;
+    this.ruDef = ruDef;
+    this.ruOnShift = ruOnShift;
   }
 }
 
@@ -35,35 +37,41 @@ class Key {
 }
 
 class Keyboard {
-  constructor() {
+  constructor(selectorStr) {
     this.keys = [];
     this.keyMap = [];
+    this.selector = document.querySelector(selectorStr);
+
+    document.addEventListener("keydown", (e) => {
+      const keyObject = this.keyMap[e.key];
+      if(keyObject !== undefined) {
+        keyObject.down();
+      }
+    });
+    
+    document.addEventListener("keyup", (e) => {
+      const keyObject = this.keyMap[e.key];
+      if(keyObject !== undefined) {
+        keyObject.up();
+      }
+    });
+  }
+
+  addKey(keyState) {
+    const key = new Key(keyState);
+
+    this.keyMap[keyState.def] = key;
+    this.keyMap[keyState.onShift] = key;
+    this.keyMap[keyState.ruDef] = key;
+    this.keyMap[keyState.ruOnShift] = key;
+
+    this.selector.appendChild(key.getHTML());
+
+    this.keys.push(key);
+
+    console.log(this.keyMap);
   }
 }
 
-var a = new Key(new KeyState('a', 'A'));
-body.appendChild(a.getHTML());
-var s = new Key(new KeyState('s', 'S'));
-body.appendChild(s.getHTML());
-
-function addKey(keyCode, keyObject, map) {
-  map[keyCode] = keyObject;
-}
-
-const keys = {};
-addKey('a', a, keys);
-addKey('s', s, keys);
-
-document.addEventListener("keydown", (e) => {
-  const keyObject = keys[e.key];
-  if(keyObject !== undefined) {
-    keyObject.down();
-  }
-});
-
-document.addEventListener("keyup", (e) => {
-  const keyObject = keys[e.key];
-  if(keyObject !== undefined) {
-    keyObject.up();
-  }
-});
+const keyboard = new Keyboard('body');
+keyboard.addKey(new KeyState('a', 'A', 'ф', 'Ф'));
