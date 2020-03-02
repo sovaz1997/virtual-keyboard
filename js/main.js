@@ -19,17 +19,25 @@ class Key {
   }
 
   down() {
+    this.makeCallBack(this.downCb);
+
     this.button.classList.add('key--down');
     console.log('down');
   }
 
   up() {
+    this.makeCallBack(this.upCb);
+
     this.button.classList.remove('key--down');
     console.log('up');
   }
 
   getHTML() {
     return this.button;
+  }
+
+  makeCallBack(cb) {
+    if(cb !== undefined) cb();
   }
 }
 
@@ -42,13 +50,19 @@ class LetterKey extends Key {
 }
 
 class ControlKey extends Key {
-
+  constructor(keyStr, downCb, upCb) {
+    super();
+    this.downCb = downCb;
+    this.upCb = upCb;
+    this.keyStr = keyStr;
+    this.button.textContent = keyStr;
+  }
 }
 
 class Keyboard {
   constructor(selectorStr) {
     this.keys = [];
-    this.keyMap = [];
+    this.keyMap = {};
     this.selector = document.querySelector(selectorStr);
 
     this.state = {
@@ -69,23 +83,41 @@ class Keyboard {
         keyObject.up();
       }
     });
+
+    this.addKeys();
+  }
+
+  bindKey(ids, keyObject) {
+    ids.forEach((it) => {
+      this.keyMap[it] = keyObject;
+    })
+
+    this.keys.push(keyObject);
   }
 
   addLetterKey(keyState) {
     const key = new LetterKey(keyState);
-
-    this.keyMap[keyState.def] = key;
-    this.keyMap[keyState.onShift] = key;
-    this.keyMap[keyState.ruDef] = key;
-    this.keyMap[keyState.ruOnShift] = key;
-
+    this.bindKey([keyState.def, keyState.onShif, keyState.ruDef, keyState.ruOnShift], key);
     this.selector.appendChild(key.getHTML());
+  }
 
-    this.keys.push(key);
+  addControlKey(keyText, keyID, cbDown, cbUp) {
+    const key = new ControlKey(keyText, cbDown, cbUp);
+    this.bindKey([keyID], key);
+    this.selector.appendChild(key.getHTML());
+  }
 
+  addKeys() {
+    this.addLetterKey(new KeyState('a', 'A', 'ф', 'Ф'));
+
+    this.addControlKey('Shift', 'Shift',
+      () => {this.state.shift = true;},
+      () => {this.state.shift = false}
+    );
+
+    
     console.log(this.keyMap);
   }
 }
 
 const keyboard = new Keyboard('body');
-keyboard.addLetterKey(new KeyState('a', 'A', 'ф', 'Ф'));
