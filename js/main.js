@@ -39,13 +39,27 @@ class Key {
   makeCallBack(cb) {
     if(cb !== undefined) cb();
   }
+
+  setText(text) {
+    this.button.textContent = text;
+  }
 }
 
 class LetterKey extends Key {
   constructor(keyState) {
     super();
     this.keyState = keyState;
-    this.button.textContent = this.keyState.def;
+    this.setText(this.keyState.def);
+  }
+
+  updateState(state) {
+    let shift = state.shift;
+
+    if(state.shift) {
+      this.setText(this.keyState.onShift);
+    } else {
+      this.setText(this.keyState.def);
+    }
   }
 }
 
@@ -55,7 +69,11 @@ class ControlKey extends Key {
     this.downCb = downCb;
     this.upCb = upCb;
     this.keyStr = keyStr;
-    this.button.textContent = keyStr;
+    this.setText(keyStr);
+  }
+
+  updateState(state) {
+
   }
 }
 
@@ -90,7 +108,7 @@ class Keyboard {
   bindKey(ids, keyObject) {
     ids.forEach((it) => {
       this.keyMap[it] = keyObject;
-    })
+    });
 
     this.keys.push(keyObject);
   }
@@ -111,12 +129,17 @@ class Keyboard {
     this.addLetterKey(new KeyState('a', 'A', 'ф', 'Ф'));
 
     this.addControlKey('Shift', 'Shift',
-      () => {this.state.shift = true;},
-      () => {this.state.shift = false}
+      () => {this.state.shift = true; this.update()},
+      () => {this.state.shift = false; this.update()}
     );
 
-    
     console.log(this.keyMap);
+  }
+
+  update() {
+    this.keys.forEach((it) => {
+      it.updateState(this.state);
+    });
   }
 }
 
