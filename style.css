@@ -1,0 +1,14 @@
+.key {
+  color: #000;
+  border: none;
+  width: 70px;
+  height: 70px;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.41);
+  background-color: #ffffff;
+  transition: 0.05s ease-out;
+}
+
+.key--down {
+  background-color: #222222;
+  color: #ffffff;
+}
