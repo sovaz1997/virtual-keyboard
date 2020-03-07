@@ -13,6 +13,15 @@ class Key {
     this.button = document.createElement('button');
     this.button.classList.add('key');
     this.pressed = false;
+
+    this.button.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      this.down();
+    });
+    this.button.addEventListener("mouseup", (e) => {
+      e.preventDefault();
+      this.up();
+    });
   }
   
   render() {
