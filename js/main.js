@@ -17,10 +17,13 @@ class Key {
     this.button.addEventListener("mousedown", (e) => {
       e.preventDefault();
       this.down();
-    });
-    this.button.addEventListener("mouseup", (e) => {
-      e.preventDefault();
-      this.up();
+
+      
+      document.addEventListener("mouseup", (e) => {
+        e.preventDefault();
+        this.up();
+        document.removeEventListener("mouseup", this);
+      });
     });
   }
   
