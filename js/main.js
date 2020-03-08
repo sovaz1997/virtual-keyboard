@@ -32,15 +32,15 @@ class Key {
   }
 
   down() {
-    this.makeCallBack(this.downCb);
     this.button.classList.add('key--down');
     this.pressed = true;
+    this.makeCallBack(this.downCb);
   }
 
   up() {
-    this.makeCallBack(this.upCb);
     this.button.classList.remove('key--down');
     this.pressed = false;
+    this.makeCallBack(this.upCb);
   }
 
   getHTML() {
