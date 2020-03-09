@@ -89,6 +89,7 @@ class TextArea {
   constructor() {
     this.textarea = document.createElement('textarea');
     this.symbols = [];
+    this.tabLength = 4;
   }
 
   getHTML() {
@@ -101,6 +102,14 @@ class TextArea {
 
   addLetter(letter) {
     this.symbols.push(letter);
+    this.update();
+  }
+
+  printTab() {
+    for(let i = 0; i < this.tabLength; ++i) {
+      this.symbols.push(' ');
+    }
+
     this.update();
   }
 
@@ -172,18 +181,15 @@ class Keyboard {
 
   addKeys() {
     this.addLetterKey('KeyA', 'en', {'en': ['a', 'A'], 'ru': ['ф', 'Ф']} , (letter) => {this.text.addLetter(letter)});
-    /*this.addLetterKey('KeyS', new KeyState('s', 'S', 'ы', 'Ы'));
-    this.addLetterKey('KeyD', new KeyState('d', 'D', 'в', 'В'));
-    this.addLetterKey('KeyF', new KeyState('f', 'F', 'а', 'А'));
-    this.addLetterKey('KeyG', new KeyState('g', 'G', 'п', 'П'));
-    this.addLetterKey('KeyH', new KeyState('h', 'H', 'р', 'Р'));
-    this.addLetterKey('KeyJ', new KeyState('j', 'J', 'о', 'О'));*/
+    this.addLetterKey('KeyS', 'en', {'en': ['s', 'S'], 'ru': ['ы', 'Ы']} , (letter) => {this.text.addLetter(letter)});
 
     this.addControlKey('ShiftLeft', 'Shift',
-      () => {this.state.shift = true; this.update()},
+      () => {
+        this.state.shift = true; this.update()},
       () => {this.state.shift = false; this.update()}
     );
 
+    this.addControlKey('Tab', 'Tab', () => {this.text.printTab()});
     this.addControlKey('AltLeft', 'Alt');
   }
 
