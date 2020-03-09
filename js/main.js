@@ -1,4 +1,5 @@
-const body = document.querySelector('body');
+"use strict";
+
 
 class KeyState {
   constructor(def, onShift, ruDef, ruOnShift) {
@@ -17,7 +18,6 @@ class Key {
     this.button.addEventListener("mousedown", (e) => {
       e.preventDefault();
       this.down();
-
       
       document.addEventListener("mouseup", (e) => {
         e.preventDefault();
@@ -48,7 +48,10 @@ class Key {
   }
 
   makeCallBack(cb) {
-    if(cb !== undefined) cb();
+    console.log(cb);
+    if(cb !== undefined) {
+      cb(this.cbParam);
+    }
   }
 
   setText(text) {
@@ -58,22 +61,28 @@ class Key {
   isPressed() {
     return this.pressed;
   }
+
+  setCbParam(param) {
+    this.cbParam = param;
+  }
 }
 class LetterKey extends Key {
-  constructor(keyState) {
+  constructor(keyState, downCb) {
     super();
     this.keyState = keyState;
-    this.setText(this.keyState.def);
+    this.downCb = downCb;
+    this.setKey(this.keyState.def);
+    
+    console.log(this.keyState, this.downCb);
   }
 
   updateState(state) {
-    let shift = state.shift;
+    state.shift ? this.setKey(this.keyState.onShift) : this.setKey(this.keyState.def);
+  }
 
-    if(state.shift) {
-      this.setText(this.keyState.onShift);
-    } else {
-      this.setText(this.keyState.def);
-    }
+  setKey(text) {
+    this.setCbParam(text);
+    this.setText(text);
   }
 }
 
@@ -129,17 +138,14 @@ class Keyboard {
 
     document.addEventListener("keydown", (e) => {
       e.preventDefault();
-      console.log(e.code, this.keyMap);
       const keyObject = this.keyMap[e.code];
       if(keyObject !== undefined) {
         keyObject.down();
-        console.log(keyObject);
       }
     });
     
     document.addEventListener("keyup", (e) => {
       e.preventDefault();
-      console.log(e.code, this.keyMap);
 
       const keyObject = this.keyMap[e.code];
       if(keyObject !== undefined) {
@@ -155,20 +161,20 @@ class Keyboard {
     this.keys.push(keyObject);
   }
 
-  addLetterKey(keyCode, keyState) {
-    const key = new LetterKey(keyState);
+  addLetterKey(keyCode, keyState, downCb = undefined) {
+    const key = new LetterKey(keyState, downCb);
     this.bindKey(keyCode, key);
     this.selector.appendChild(key.getHTML());
   }
 
-  addControlKey(keyCode, keyText, cbDown = undefined, cbUp = undefined) {
-    const key = new ControlKey(keyText, cbDown, cbUp);
+  addControlKey(keyCode, keyText, downCb = undefined, upCb = undefined) {
+    const key = new ControlKey(keyText, downCb, upCb);
     this.bindKey(keyCode, key);
     this.selector.appendChild(key.getHTML());
   }
 
   addKeys() {
-    this.addLetterKey('KeyA', new KeyState('a', 'A', 'ф', 'Ф'));
+    this.addLetterKey('KeyA', new KeyState('a', 'A', 'ф', 'Ф'), (letter) => {this.text.addLetter(letter)});
     this.addLetterKey('KeyS', new KeyState('s', 'S', 'ы', 'Ы'));
     this.addLetterKey('KeyD', new KeyState('d', 'D', 'в', 'В'));
     this.addLetterKey('KeyF', new KeyState('f', 'F', 'а', 'А'));
@@ -182,13 +188,13 @@ class Keyboard {
     );
 
     this.addControlKey('AltLeft', 'Alt');
-
-    console.log(this.keyMap);
   }
 
   update() {
     this.keys.forEach((it) => {
-      it.updateState(this.state);
+      if(it instanceof LetterKey) {
+        it.updateState(this.state);
+      }
     });
   }
 
@@ -197,4 +203,6 @@ class Keyboard {
   }
 }
 
-const keyboard = new Keyboard('body');
+window.onload = function() {
+  new Keyboard('body');
+}
