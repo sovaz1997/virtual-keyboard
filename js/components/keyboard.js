@@ -1,6 +1,5 @@
 import TextArea from './text-area.js';
-import LetterKey from './letter-key.js'
-import ControlKey from './control-key.js'
+import Key from './key.js';
 
 export default class Keyboard {
   constructor(selectorStr) {
@@ -52,13 +51,13 @@ export default class Keyboard {
   }
 
   addLetterKey(keyCode, lang, keyState, downCb = undefined) {
-    const key = new LetterKey(lang, keyState, downCb);
+    const key = new Key(lang, keyState, downCb);
     this.bindKey(keyCode, key);
     this.selector.appendChild(key.getHTML());
   }
 
   addControlKey(keyCode, keyText, downCb = undefined, upCb = undefined) {
-    const key = new ControlKey(keyText, downCb, upCb);
+    const key = new Key('en', keyText, downCb, upCb);
     this.bindKey(keyCode, key);
     this.selector.appendChild(key.getHTML());
   }
@@ -79,9 +78,7 @@ export default class Keyboard {
 
   update() {
     this.keys.forEach((it) => {
-      if(it instanceof LetterKey) {
-        it.updateState(this.state);
-      }
+      it.updateState(this.state);
     });
   }
 

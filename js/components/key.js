@@ -1,5 +1,5 @@
 export default class Key {
-  constructor() {
+  constructor(lang, keyState, downCb, upCb) {
     this.button = document.createElement('button');
     this.button.classList.add('key');
     this.pressed = false;
@@ -14,8 +14,34 @@ export default class Key {
         document.removeEventListener("mouseup", this);
       });
     });
+
+    this.keyState = keyState;
+    this.simpleKey = (typeof(keyState) === 'string');
+
+    this.downCb = downCb;
+    this.upCb = upCb;
+
+    this.updateState({lang, shift: false});
   }
-  
+
+  getText() {
+    if(this.simpleKey) {
+      return this.keyState;
+    }
+
+    return this.keyState[this.state.lang][+this.state.shift];
+  }
+
+  updateState(state) {
+    this.state = state;
+    this.setKey(this.getText());
+  }
+
+  setKey(text) {
+    this.setCbParam(text);
+    this.setText(text);
+  }
+
   render() {
     return this.button;
   }
