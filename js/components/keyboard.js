@@ -12,7 +12,7 @@ export default class Keyboard {
     this.keyMap = {};
     this.selector = document.querySelector(selectorStr);
     
-    this.selector.appendChild(this.text.getHTML());
+    this.selector.append(this.text.getHTML());
 
 
     this.state = {
@@ -50,30 +50,26 @@ export default class Keyboard {
     this.keys.push(keyObject);
   }
 
-  addLetterKey(keyCode, lang, keyState, downCb = undefined) {
-    const key = new Key(lang, keyState, downCb);
-    this.bindKey(keyCode, key);
-    this.selector.appendChild(key.getHTML());
-  }
-
-  addControlKey(keyCode, keyText, downCb = undefined, upCb = undefined) {
-    const key = new Key('en', keyText, downCb, upCb);
-    this.bindKey(keyCode, key);
-    this.selector.appendChild(key.getHTML());
+  appendKey(keyCode, defaultLang, keyState, downCallback) {
+    const el = document.createElement('div');
+    this.bindKey(keyCode, new Key(el, defaultLang, keyState, downCallback));
+    this.selector.append(el);
   }
 
   addKeys() {
-    this.addLetterKey('KeyA', 'en', {'en': ['a', 'A'], 'ru': ['ф', 'Ф']} , (letter) => {this.text.addLetter(letter)});
-    this.addLetterKey('KeyS', 'en', {'en': ['s', 'S'], 'ru': ['ы', 'Ы']} , (letter) => {this.text.addLetter(letter)});
+    this.appendKey('KeyA', 'en', {'en': ['a', 'A'], 'ru': ['ф', 'Ф']}, (letter) => {this.text.addLetter(letter)});
 
-    this.addControlKey('ShiftLeft', 'Shift',
+    //this.addLetterKey('KeyA', 'en', {'en': ['a', 'A'], 'ru': ['ф', 'Ф']} , (letter) => {this.text.addLetter(letter)});
+    //this.addLetterKey('KeyS', 'en', {'en': ['s', 'S'], 'ru': ['ы', 'Ы']} , (letter) => {this.text.addLetter(letter)});
+
+    /*this.addControlKey('ShiftLeft', 'Shift',
       () => {
         this.state.shift = true; this.update()},
       () => {this.state.shift = false; this.update()}
     );
 
     this.addControlKey('Tab', 'Tab', () => {this.text.printTab()});
-    this.addControlKey('AltLeft', 'Alt');
+    this.addControlKey('AltLeft', 'Alt');*/
   }
 
   update() {
