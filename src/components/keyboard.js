@@ -101,54 +101,6 @@ export default class Keyboard {
     this.selector.append(this.createRow3());
     this.selector.append(this.createRow4());
     this.selector.append(this.createRow5());
-
-    /*
-    this.appendKey('KeyA', 'en', { en: ['a', 'A'], ru: ['ф', 'Ф'] },
-      (letter) => { this.text.addLetter(letter); });
-
-    this.appendKey('ControlLeft', 'en', 'Ctrl',
-      () => {
-        this.updateControlKeyState('Ctrl', true);
-      },
-      () => {
-        this.updateControlKeyState('Ctrl', false);
-      });
-
-    this.appendKey('ShiftLeft', 'en', 'Shift',
-      () => {
-        this.updateControlKeyState('Shift', true);
-      },
-      () => {
-        this.updateControlKeyState('Shift', false);
-      });
-
-    this.appendKey('AltLeft', 'en', 'Alt',
-      () => {
-        this.updateControlKeyState('Alt', true);
-      },
-      () => {
-        this.updateControlKeyState('Alt', false);
-      });
-      */
-
-
-    /*
-    this.addLetterKey('KeyA', 'en', {'en': ['a', 'A'], 'ru': ['ф', 'Ф']} ,
-      (letter) => {this.text.addLetter(letter)});
-    this.addLetterKey('KeyS', 'en', {'en': ['s', 'S'], 'ru': ['ы', 'Ы']} ,
-      (letter) => {this.text.addLetter(letter)});
-    */
-
-    /*
-    this.addControlKey('ShiftLeft', 'Shift',
-      () => {
-        this.state.shift = true; this.update()},
-      () => {this.state.shift = false; this.update()}
-    );
-
-    this.addControlKey('Tab', 'Tab', () => {this.text.printTab()});
-    this.addControlKey('AltLeft', 'Alt');
-    */
   }
 
   createRow1() {
