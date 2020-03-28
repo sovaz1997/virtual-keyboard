@@ -91,6 +91,7 @@ export default class Keyboard {
       'Caps Lock': 0,
       Alt: 0,
       Shift: 0,
+      Meta: 0,
     };
   }
 
@@ -98,6 +99,8 @@ export default class Keyboard {
     this.selector.append(this.createRow1());
     this.selector.append(this.createRow2());
     this.selector.append(this.createRow3());
+    this.selector.append(this.createRow4());
+    this.selector.append(this.createRow5());
 
     /*
     this.appendKey('KeyA', 'en', { en: ['a', 'A'], ru: ['ф', 'Ф'] },
@@ -200,7 +203,7 @@ export default class Keyboard {
     const row = Keyboard.createRow();
 
     row.append(this.appendKey('Tab', this.getLang(), { en: ['Tab', 'Tab'], ru: ['Tab', 'Tab'] },
-      () => { this.text.tab(); }));
+      () => { this.text.addLetter('\t'); }));
 
     row.append(this.appendKey('KeyQ', this.getLang(), { en: ['q', 'Q'], ru: ['й', 'Й'] },
       (letter) => { this.text.addLetter(letter); }));
@@ -284,7 +287,112 @@ export default class Keyboard {
       (letter) => { this.text.addLetter(letter); }));
 
     row.append(this.appendKey('Enter', this.getLang(), { en: ['Enter', 'Enter'], ru: ['Enter', 'Enter'] },
-      () => { this.text.newLine(); }));
+      () => { this.text.addLetter('\n'); }));
+
+    return row;
+  }
+
+  createRow4() {
+    const row = Keyboard.createRow();
+
+    row.append(this.appendKey('ShiftLeft', this.getLang(), 'Shift',
+      () => {
+        this.updateControlKeyState('Shift', true);
+      },
+      () => {
+        this.updateControlKeyState('Shift', false);
+      }));
+
+    row.append(this.appendKey('IntlBackslash', this.getLang(), { en: ['\\', '|'], ru: ['\\', '/'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('KeyZ', this.getLang(), { en: ['z', 'Z'], ru: ['я', 'Я'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('KeyX', this.getLang(), { en: ['x', 'X'], ru: ['ч', 'Ч'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('KeyC', this.getLang(), { en: ['c', 'C'], ru: ['с', 'С'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('KeyV', this.getLang(), { en: ['v', 'V'], ru: ['м', 'М'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('KeyB', this.getLang(), { en: ['b', 'B'], ru: ['и', 'И'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('KeyN', this.getLang(), { en: ['n', 'N'], ru: ['т', 'Т'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('KeyM', this.getLang(), { en: ['m', 'M'], ru: ['ь', 'Ь'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('Comma', this.getLang(), { en: [',', '<'], ru: ['б', 'Б'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('Period', this.getLang(), { en: ['.', '>'], ru: ['ю', 'Ю'] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('Slash', this.getLang(), { en: ['/', '?'], ru: ['.', ','] },
+      (letter) => { this.text.addLetter(letter); }));
+
+    row.append(this.appendKey('ShiftRight', this.getLang(), { en: ['Shift', 'Shift'], ru: ['Shift', 'Shift'] },
+      () => {
+        this.updateControlKeyState('Shift', true);
+      },
+      () => {
+        this.updateControlKeyState('Shift', false);
+      }));
+
+    return row;
+  }
+
+  createRow5() {
+    const row = Keyboard.createRow();
+
+    row.append(this.appendKey('ControlLeft', 'en', 'Ctrl',
+      () => {
+        this.updateControlKeyState('Ctrl', true);
+      },
+      () => {
+        this.updateControlKeyState('Ctrl', false);
+      }));
+
+    row.append(this.appendKey('MetaLeft', this.getLang(), 'Win',
+      () => {
+        this.updateControlKeyState('Meta', true);
+      },
+      () => {
+        this.updateControlKeyState('Meta', false);
+      }));
+
+    row.append(this.appendKey('AltLeft', this.getLang(), 'Alt',
+      () => {
+        this.updateControlKeyState('Alt', true);
+      },
+      () => {
+        this.updateControlKeyState('Alt', false);
+      }));
+
+    row.append(this.appendKey('Space', this.getLang(), { en: ['Space', 'Space'], ru: ['Space', 'Space'] },
+      () => { this.text.addLetter(' '); }));
+
+
+    row.append(this.appendKey('AltRight', this.getLang(), 'Alt',
+      () => {
+        this.updateControlKeyState('Alt', true);
+      },
+      () => {
+        this.updateControlKeyState('Alt', false);
+      }));
+
+    row.append(this.appendKey('ControlRight', 'en', 'Ctrl',
+      () => {
+        this.updateControlKeyState('Ctrl', true);
+      },
+      () => {
+        this.updateControlKeyState('Ctrl', false);
+      }));
 
     return row;
   }

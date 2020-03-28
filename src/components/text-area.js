@@ -24,20 +24,8 @@ export default class TextArea {
     this.render();
   }
 
-  tab() {
-    for (let i = 0; i < this.tabLength; i += 1) {
-      this.symbols.push(' ');
-    }
-
-    this.render();
-  }
-
   backSpace() {
     this.symbols.pop();
     this.render();
-  }
-
-  newLine() {
-    this.symbols.push('\n');
   }
 }
