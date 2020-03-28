@@ -12,7 +12,7 @@ export default class Keyboard {
     this.keyMap = {};
     this.selector = document.querySelector(selectorStr);
 
-    this.selector.append(this.text.getHTML());
+    this.selector.append(this.text.element);
 
     this.state = {
       lang: 'en',
@@ -50,9 +50,9 @@ export default class Keyboard {
   }
 
   appendKey(keyCode, defaultLang, keyState, downCallback) {
-    const el = document.createElement('div');
-    this.bindKey(keyCode, new Key(el, defaultLang, keyState, downCallback));
-    this.selector.append(el);
+    const key = new Key(defaultLang, keyState, downCallback);
+    this.bindKey(keyCode, key);
+    this.selector.append(key.element);
   }
 
   addKeys() {

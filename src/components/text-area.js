@@ -1,21 +1,27 @@
 export default class TextArea {
   constructor() {
-    this.textarea = document.createElement('textarea');
     this.symbols = [];
     this.tabLength = 4;
+
+    this.createElement();
+    this.render();
   }
 
-  getHTML() {
-    return this.textarea;
+  createElement() {
+    this.el = document.createElement('textarea');
   }
 
-  update() {
-    this.textarea.textContent = this.symbols.join('');
+  get element() {
+    return this.el;
+  }
+
+  render() {
+    this.el.textContent = this.symbols.join('');
   }
 
   addLetter(letter) {
     this.symbols.push(letter);
-    this.update();
+    this.render();
   }
 
   printTab() {
@@ -23,11 +29,11 @@ export default class TextArea {
       this.symbols.push(' ');
     }
 
-    this.update();
+    this.render();
   }
 
   backSpace() {
     this.symbols.pop();
-    this.update();
+    this.render();
   }
 }

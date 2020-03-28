@@ -1,26 +1,33 @@
-import Component from './component';
-
-export default class Key extends Component {
-  constructor(container, lang, keyState, downCb, upCb) {
-    super(container);
-
+export default class Key {
+  constructor(lang, keyState, downCb, upCb) {
     this.keyState = keyState;
 
     this.simpleKey = (typeof keyState === 'string');
 
+    this.lang = lang;
+    this.shift = false;
+    this.pressed = false;
+
     this.downCb = downCb;
     this.upCb = upCb;
 
-    this.updateState({ lang, shift: false, pressed: false });
+    this.createElement();
     this.addClickEvents();
+    this.render();
+  }
+
+  createElement() {
+    this.el = document.createElement('button');
+    this.el.classList = ['key'];
+  }
+
+  get element() {
+    return this.el;
   }
 
   render() {
-    this.container.innerHTML = Key.template(this.state.pressed, this.text);
-  }
-
-  static template(pressed, text) {
-    return `<button class="key ${pressed ? 'key--down' : ''}">${text}</button>`;
+    this.el.classList.toggle('key--down', this.pressed);
+    this.el.innerText = this.text;
   }
 
   get text() {
@@ -28,25 +35,22 @@ export default class Key extends Component {
       return this.keyState;
     }
 
-    return this.keyState[this.state.lang][+this.state.shift];
-  }
-
-  updateState(state) {
-    this.state = { ...this.state, ...state };
-    this.render();
+    return this.keyState[this.lang][+this.shift];
   }
 
   down() {
-    this.updateState({ pressed: true });
+    this.pressed = true;
+    this.render();
     this.downCb(this.text);
   }
 
   up() {
-    this.updateState({ pressed: false });
+    this.pressed = false;
+    this.render();
   }
 
   addClickEvents() {
-    this.container.addEventListener('mousedown', (e) => {
+    this.el.addEventListener('mousedown', (e) => {
       e.preventDefault();
       this.down();
 
