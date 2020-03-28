@@ -49,6 +49,8 @@ export default class Key {
   }
 
   down() {
+    if (this.pressed) return;
+
     this.pressed = true;
     this.render();
 
@@ -58,6 +60,8 @@ export default class Key {
   }
 
   up() {
+    if (!this.pressed) return;
+
     this.pressed = false;
     this.render();
     if (this.upCb !== undefined) {
