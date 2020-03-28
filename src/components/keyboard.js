@@ -21,7 +21,7 @@ export default class Keyboard {
       if (keyObject !== undefined) {
         keyObject.down();
 
-        if (e.repeat) {
+        if (e.repeat && !keyObject.simpleKey) {
           keyObject.up();
         }
       }
