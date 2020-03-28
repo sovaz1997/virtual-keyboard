@@ -35,6 +35,11 @@ export default class Key {
     this.el.innerText = this.text;
   }
 
+  setLang(lang) {
+    this.lang = lang;
+    this.render();
+  }
+
   get text() {
     if (this.simpleKey) {
       return this.keyState;

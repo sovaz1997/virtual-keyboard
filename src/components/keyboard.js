@@ -15,11 +15,6 @@ export default class Keyboard {
 
     this.selector.append(this.text.element);
 
-    this.state = {
-      lang: 'en',
-      shift: false,
-    };
-
     document.addEventListener('keydown', (e) => {
       e.preventDefault();
       const keyObject = this.keyMap[e.code];
@@ -43,6 +38,14 @@ export default class Keyboard {
   nextLang() {
     this.currentLang += 1;
     this.currentLang %= this.langList.length;
+
+    this.keys.forEach((it) => {
+      it.setLang(this.getLang());
+    });
+  }
+
+  getLang() {
+    return this.langList[this.currentLang];
   }
 
   bindKey(keyCode, keyObject) {
@@ -57,11 +60,15 @@ export default class Keyboard {
   }
 
   updateKeyboardState() {
-    this.state.shift = !!this.controlState.Shift;
+    const shift = !!this.controlState.Shift;
 
     this.keys.forEach((it) => {
-      it.setUpperCase(this.state.shift);
+      it.setUpperCase(shift);
     });
+
+    if (this.controlState.Shift && this.controlState.Alt) {
+      this.nextLang();
+    }
   }
 
   updateControlKeyState(key, down) {
@@ -101,6 +108,14 @@ export default class Keyboard {
       },
       () => {
         this.updateControlKeyState('Shift', false);
+      });
+
+    this.appendKey('AltLeft', 'en', 'Alt',
+      () => {
+        this.updateControlKeyState('Alt', true);
+      },
+      () => {
+        this.updateControlKeyState('Alt', false);
       });
 
 
