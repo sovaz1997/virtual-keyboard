@@ -1,4 +1,4 @@
-import Component from './component.js';
+import Component from './component';
 
 export default class Key extends Component {
   constructor(container, lang, keyState, downCb, upCb) {
@@ -6,12 +6,12 @@ export default class Key extends Component {
 
     this.keyState = keyState;
 
-    this.simpleKey = (typeof(keyState) === 'string');
+    this.simpleKey = (typeof keyState === 'string');
 
     this.downCb = downCb;
     this.upCb = upCb;
 
-    this.updateState({lang, shift: false, pressed: false});
+    this.updateState({ lang, shift: false, pressed: false });
     this.addClickEvents();
   }
 
@@ -24,7 +24,7 @@ export default class Key extends Component {
   }
 
   get text() {
-    if(this.simpleKey) {
+    if (this.simpleKey) {
       return this.keyState;
     }
 
@@ -32,28 +32,28 @@ export default class Key extends Component {
   }
 
   updateState(state) {
-    this.state = {...this.state, ...state};
+    this.state = { ...this.state, ...state };
     this.render();
   }
 
   down() {
-    this.updateState({pressed: true});
+    this.updateState({ pressed: true });
     this.downCb(this.text);
   }
 
   up() {
-    this.updateState({pressed: false});
+    this.updateState({ pressed: false });
   }
 
   addClickEvents() {
-    this.container.addEventListener("mousedown", (e) => {
+    this.container.addEventListener('mousedown', (e) => {
       e.preventDefault();
       this.down();
-      
-      document.addEventListener("mouseup", (e) => {
-        e.preventDefault();
+
+      document.addEventListener('mouseup', (evt) => {
+        evt.preventDefault();
         this.up();
-        document.removeEventListener("mouseup", this);
+        document.removeEventListener('mouseup', this);
       });
     });
   }

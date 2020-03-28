@@ -1,6 +1,6 @@
 export default class Component {
   constructor(container) {
-    if(typeof container.dataset.ref === 'undefined') {
+    if (typeof container.dataset.ref === 'undefined') {
       this.ref = Math.random();
 
       Component.refs[this.ref] = this;
@@ -12,7 +12,7 @@ export default class Component {
     }
   }
 
-  render() {
+  static render() {
     return '';
   }
 }

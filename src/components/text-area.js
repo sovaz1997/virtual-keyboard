@@ -10,7 +10,7 @@ export default class TextArea {
   }
 
   update() {
-    this.textarea.textContent = this.symbols.join("");
+    this.textarea.textContent = this.symbols.join('');
   }
 
   addLetter(letter) {
@@ -19,7 +19,7 @@ export default class TextArea {
   }
 
   printTab() {
-    for(let i = 0; i < this.tabLength; ++i) {
+    for (let i = 0; i < this.tabLength; i += 1) {
       this.symbols.push(' ');
     }
 

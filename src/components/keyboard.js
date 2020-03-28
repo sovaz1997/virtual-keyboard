@@ -1,5 +1,5 @@
-import TextArea from './text-area.js';
-import Key from './key.js';
+import TextArea from './text-area';
+import Key from './key';
 
 export default class Keyboard {
   constructor(selectorStr) {
@@ -11,28 +11,27 @@ export default class Keyboard {
     this.keys = [];
     this.keyMap = {};
     this.selector = document.querySelector(selectorStr);
-    
-    this.selector.append(this.text.getHTML());
 
+    this.selector.append(this.text.getHTML());
 
     this.state = {
       lang: 'en',
-      shift: false
+      shift: false,
     };
 
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener('keydown', (e) => {
       e.preventDefault();
       const keyObject = this.keyMap[e.code];
-      if(keyObject !== undefined) {
+      if (keyObject !== undefined) {
         keyObject.down();
       }
     });
-    
-    document.addEventListener("keyup", (e) => {
+
+    document.addEventListener('keyup', (e) => {
       e.preventDefault();
 
       const keyObject = this.keyMap[e.code];
-      if(keyObject !== undefined) {
+      if (keyObject !== undefined) {
         keyObject.up();
       }
     });
@@ -41,7 +40,7 @@ export default class Keyboard {
   }
 
   nextLang() {
-    this.currentLang++;
+    this.currentLang += 1;
     this.currentLang %= this.langList.length;
   }
 
@@ -57,28 +56,31 @@ export default class Keyboard {
   }
 
   addKeys() {
-    this.appendKey('KeyA', 'en', {'en': ['a', 'A'], 'ru': ['ф', 'Ф']}, (letter) => {this.text.addLetter(letter)});
+    this.appendKey('KeyA', 'en', { en: ['a', 'A'], ru: ['ф', 'Ф'] },
+      (letter) => { this.text.addLetter(letter); });
 
-    //this.addLetterKey('KeyA', 'en', {'en': ['a', 'A'], 'ru': ['ф', 'Ф']} , (letter) => {this.text.addLetter(letter)});
-    //this.addLetterKey('KeyS', 'en', {'en': ['s', 'S'], 'ru': ['ы', 'Ы']} , (letter) => {this.text.addLetter(letter)});
+    /*
+    this.addLetterKey('KeyA', 'en', {'en': ['a', 'A'], 'ru': ['ф', 'Ф']} ,
+      (letter) => {this.text.addLetter(letter)});
+    this.addLetterKey('KeyS', 'en', {'en': ['s', 'S'], 'ru': ['ы', 'Ы']} ,
+      (letter) => {this.text.addLetter(letter)});
+    */
 
-    /*this.addControlKey('ShiftLeft', 'Shift',
+    /*
+    this.addControlKey('ShiftLeft', 'Shift',
       () => {
         this.state.shift = true; this.update()},
       () => {this.state.shift = false; this.update()}
     );
 
     this.addControlKey('Tab', 'Tab', () => {this.text.printTab()});
-    this.addControlKey('AltLeft', 'Alt');*/
+    this.addControlKey('AltLeft', 'Alt');
+    */
   }
 
   update() {
     this.keys.forEach((it) => {
       it.updateState(this.state);
     });
-  }
-
-  languageToggle() {
-
   }
 }
