@@ -24,7 +24,7 @@ export default class TextArea {
     this.render();
   }
 
-  printTab() {
+  tab() {
     for (let i = 0; i < this.tabLength; i += 1) {
       this.symbols.push(' ');
     }
@@ -35,5 +35,9 @@ export default class TextArea {
   backSpace() {
     this.symbols.pop();
     this.render();
+  }
+
+  newLine() {
+    this.symbols.push('\n');
   }
 }
