@@ -5,7 +5,7 @@ export default class Key {
     this.simpleKey = (typeof keyState === 'string');
 
     this.lang = lang;
-    this.shift = false;
+    this.upperCase = false;
     this.pressed = false;
 
     this.downCb = downCb;
@@ -25,6 +25,11 @@ export default class Key {
     return this.el;
   }
 
+  setUpperCase(value = true) {
+    this.upperCase = value;
+    this.render();
+  }
+
   render() {
     this.el.classList.toggle('key--down', this.pressed);
     this.el.innerText = this.text;
@@ -35,18 +40,24 @@ export default class Key {
       return this.keyState;
     }
 
-    return this.keyState[this.lang][+this.shift];
+    return this.keyState[this.lang][+this.upperCase];
   }
 
   down() {
     this.pressed = true;
     this.render();
-    this.downCb(this.text);
+
+    if (this.downCb !== undefined) {
+      this.downCb(this.text);
+    }
   }
 
   up() {
     this.pressed = false;
     this.render();
+    if (this.upCb !== undefined) {
+      this.upCb(this.text);
+    }
   }
 
   addClickEvents() {
