@@ -31,12 +31,12 @@
   padding: 10px;
   box-sizing: border-box;
   font-size: 20px;
-
   transition: all .1s ease-out;
+  user-select: none;
 }
 
 .key--down {
-  background-color: #222222;
+  background-color: rgb(0, 122, 255);
   color: #ffffff;
 }
 
