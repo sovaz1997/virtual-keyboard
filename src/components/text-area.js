@@ -9,6 +9,7 @@ export default class TextArea {
 
   createElement() {
     this.el = document.createElement('textarea');
+    this.el.classList.add('textarea');
   }
 
   get element() {

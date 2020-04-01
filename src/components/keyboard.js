@@ -13,8 +13,26 @@ export default class Keyboard {
     this.keyMap = {};
     this.selector = document.querySelector(selectorStr);
 
-    this.selector.append(this.text.element);
+    this.buildKeyBoard();
+    this.addEventListeners();
+  }
 
+  buildKeyBoard() {
+    const keyboard = document.createElement('div');
+    keyboard.classList.add('keyboard');
+
+    keyboard.append(this.text.element);
+
+    const keys = document.createElement('div');
+    keys.classList.add('keys');
+
+    this.createKeys(keys);
+
+    keyboard.append(keys);
+    this.selector.append(keyboard);
+  }
+
+  addEventListeners() {
     document.addEventListener('keydown', (e) => {
       e.preventDefault();
       const keyObject = this.keyMap[e.code];
@@ -35,8 +53,6 @@ export default class Keyboard {
         keyObject.up();
       }
     });
-
-    this.addKeys();
   }
 
   nextLang() {
@@ -104,12 +120,27 @@ export default class Keyboard {
     };
   }
 
-  addKeys() {
-    this.selector.append(this.createRow1());
-    this.selector.append(this.createRow2());
-    this.selector.append(this.createRow3());
-    this.selector.append(this.createRow4());
-    this.selector.append(this.createRow5());
+  createKeys(selector) {
+    selector.append(this.createRow1());
+    selector.append(this.createRow2());
+    selector.append(this.createRow3());
+    selector.append(this.createRow4());
+    selector.append(this.createRow5());
+
+    this.styleKeys();
+  }
+
+  styleKeys() {
+    this.keyMap.Space.addModifiers('space');
+    this.keyMap.ShiftLeft.addModifiers('shift-left', 'left');
+    this.keyMap.ShiftRight.addModifiers('shift-right', 'right');
+    this.keyMap.Enter.addModifiers('enter', 'right');
+    this.keyMap.Tab.addModifiers('tab', 'left');
+    this.keyMap.CapsLock.addModifiers('caps-lock', 'left');
+    this.keyMap.ControlLeft.addModifiers('left');
+    this.keyMap.ControlRight.addModifiers('right');
+    this.keyMap.Delete.addModifiers('right');
+    this.keyMap.Backspace.addModifiers('right');
   }
 
   createRow1() {
@@ -201,6 +232,8 @@ export default class Keyboard {
 
     row.append(this.appendKey('BracketRight', new Key(this.getLang(), false, { en: [']', '}'], ru: ['ъ', 'Ъ'] },
       (letter) => { this.text.addLetter(letter); })));
+
+    row.append(this.appendKey('Delete', new Key(this.getLang(), false, { en: ['Del', 'Del'], ru: ['Del', 'Del'] })));
 
     return row;
   }

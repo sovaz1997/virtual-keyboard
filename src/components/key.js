@@ -88,4 +88,8 @@ export default class Key {
       });
     });
   }
+
+  addModifiers(...modifiers) {
+    this.el.classList.add(...modifiers.map((el) => `key--${el}`));
+  }
 }
