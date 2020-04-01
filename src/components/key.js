@@ -22,6 +22,19 @@ export default class Key {
     this.el.classList = ['key'];
   }
 
+  addIndicator() {
+    this.indicator = false;
+    this.addModifiers('indicator');
+  }
+
+  toggleIndicator(value) {
+    if (this.indicator === undefined) {
+      return;
+    }
+
+    this.el.classList.toggle(Key.modifierClass('indicator-on', value));
+  }
+
   get element() {
     return this.el;
   }
@@ -90,6 +103,10 @@ export default class Key {
   }
 
   addModifiers(...modifiers) {
-    this.el.classList.add(...modifiers.map((el) => `key--${el}`));
+    this.el.classList.add(...modifiers.map((el) => Key.modifierClass(el)));
+  }
+
+  static modifierClass(value) {
+    return `key--${value}`;
   }
 }
