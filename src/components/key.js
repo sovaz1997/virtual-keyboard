@@ -1,6 +1,7 @@
 export default class Key {
-  constructor(lang, keyState, downCb, upCb) {
+  constructor(lang, isLetter, keyState, downCb, upCb) {
     this.keyState = keyState;
+    this.isLetter = isLetter;
 
     this.simpleKey = (typeof keyState === 'string');
 
@@ -25,8 +26,14 @@ export default class Key {
     return this.el;
   }
 
-  setUpperCase(value = true) {
-    this.upperCase = value;
+  setUpperCase(shift, capsLock) {
+    let upperCase = shift;
+
+    if (this.isLetter && capsLock) {
+      upperCase = !upperCase;
+    }
+
+    this.upperCase = upperCase;
     this.render();
   }
 
