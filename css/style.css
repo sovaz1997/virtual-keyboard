@@ -14,6 +14,9 @@
 }
 
 .key {
+  position: relative;
+  display: flex;
+  align-items: center;
   color: #000;
   border: none;
   flex-grow: 1;
@@ -32,8 +35,20 @@
   color: #ffffff;
 }
 
-.key--shift {
-  flex-grow: 1.25;
+.key--indicator::after {
+  display: block;
+  content: " ";
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  right: 10px;
+
+  border-radius: 50%;
+  background-color: #000000;
+}
+
+.key--indicator-on::after {
+  background-color: green;
 }
 
 .key--caps-lock {
@@ -44,9 +59,17 @@
 }
 
 .key--tab {
-  flex-grow: 2;
+  flex-grow: 1.8;
 }
 
 .key--space {
   flex-grow: 5;
+}
+
+.key--shift-left {
+  flex-grow: 1.25;
+}
+
+.key--shift-right {
+  flex-grow: 3;
 }

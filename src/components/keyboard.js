@@ -64,15 +64,26 @@ export default class Keyboard {
   }
 
   updateKeyboardState() {
-    const shift = !!this.controlState.Shift;
-
-    this.keys.forEach((it) => {
-      it.setUpperCase(shift);
-    });
-
     if (this.controlState.Shift && this.controlState.Alt) {
       this.nextLang();
+      return;
     }
+
+    if (this.controlState.CapsLock) {
+      this.capsLockOn = true;
+    } else {
+      this.capsLockOn = false;
+    }
+
+    let upperCase = !!this.controlState.Shift;
+
+    if (this.controlState.CapsLock) {
+      upperCase = !upperCase;
+    }
+
+    this.keys.forEach((it) => {
+      it.setUpperCase(upperCase);
+    });
   }
 
   updateControlKeyState(key, down) {
@@ -85,10 +96,15 @@ export default class Keyboard {
     this.updateKeyboardState();
   }
 
+  toggleControlState(key) {
+    this.controlState[key] = !this.controlState[key];
+    this.updateKeyboardState();
+  }
+
   setDefaultControlKeyState() {
     this.controlState = {
       Ctrl: 0,
-      'Caps Lock': 0,
+      CapsLock: 0,
       Alt: 0,
       Shift: 0,
       Meta: 0,
@@ -200,7 +216,9 @@ export default class Keyboard {
     const row = Keyboard.createRow();
 
     row.append(this.appendKey('CapsLock', this.getLang(), 'Caps Lock',
-      () => {}));
+      () => {
+        this.toggleControlState('CapsLock', true);
+      }));
 
     row.append(this.appendKey('KeyA', this.getLang(), { en: ['a', 'A'], ru: ['ф', 'Ф'] },
       (letter) => { this.text.addLetter(letter); }));
