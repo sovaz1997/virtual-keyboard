@@ -18,6 +18,10 @@ export default class Keyboard {
   }
 
   setLang(langIndex) {
+    if (typeof window.localStorage.lang === 'undefined') {
+      window.localStorage.lang = 0;
+    }
+
     if (langIndex === undefined) {
       this.currentLang = Number(window.localStorage.lang);
     } else {
