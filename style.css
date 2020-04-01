@@ -1,0 +1,96 @@
+:root {
+  --key-size: 50px;
+  --key-gap: 7px;
+}
+
+.keyboard {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  margin-right: calc(var(--key-gap) * -1);
+  margin-bottom: var(--key-gap);
+}
+
+.key {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  border: none;
+  flex-grow: 1;
+  height: var(--key-size);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.41);
+  background-color: #ffffff;
+  transition: 0.05s ease-out;
+  border-radius: 7px;
+  margin-right: var(--key-gap);
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 20px;
+
+  transition: all .1s ease-out;
+}
+
+.key--down {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+.key--indicator::after {
+  display: block;
+  content: " ";
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  right: 10px;
+
+  border-radius: 50%;
+  background-color: #000000;
+}
+
+.key--indicator-on::after {
+  background-color: green;
+}
+
+.key--caps-lock {
+  flex-grow: 1.4;
+}
+.key--enter {
+  flex-grow: 2;
+}
+
+.key--tab {
+  flex-grow: 1.8;
+}
+
+.key--space {
+  flex-grow: 5;
+}
+
+.key--shift-left {
+  flex-grow: 1.25;
+}
+
+.key--shift-right {
+  flex-grow: 3;
+}
+
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: none;
+  height: 300px;
+  font-size: 18px;;
+}
+
+.key--left {
+  justify-content: flex-start;
+}
+
+.key--right {
+  justify-content: flex-end;
+}
