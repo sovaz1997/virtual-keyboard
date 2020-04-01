@@ -4,6 +4,7 @@ export default class TextArea {
     this.tabLength = 4;
 
     this.createElement();
+    this.updateCursor(0);
     this.render();
   }
 
@@ -18,15 +19,26 @@ export default class TextArea {
 
   render() {
     this.el.textContent = this.symbols.join('');
+    this.el.focus();
+  }
+
+  updateCursor(position) {
+    this.cursor = position;
+    this.cursor = Math.min(0, this.cursor);
+    this.cursor = Math.max(this.symbols.length, this.cursor);
+    this.el.selectionStart = this.cursor;
+    this.el.selectionEnd = this.cursor;
   }
 
   addLetter(letter) {
-    this.symbols.push(letter);
+    this.symbols.splice(this.cursor, 0, letter);
     this.render();
+    this.updateCursor(this.cursor + 1);
   }
 
   backSpace() {
     this.symbols.pop();
     this.render();
+    this.updateCursor(this.cursor - 1);
   }
 }
