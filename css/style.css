@@ -5,6 +5,7 @@
 
 .keyboard {
   max-width: 1000px;
+  margin: 0 auto;
 }
 
 .row {
@@ -72,4 +73,12 @@
 
 .key--shift-right {
   flex-grow: 3;
+}
+
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: none;
+  height: 300px;
+  font-size: 18px;;
 }
