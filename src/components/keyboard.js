@@ -6,7 +6,7 @@ export default class Keyboard {
     this.text = new TextArea();
 
     this.langList = ['en', 'ru'];
-    this.currentLang = 0;
+    this.setLang();
     this.setDefaultControlKeyState();
 
     this.keys = [];
@@ -15,6 +15,16 @@ export default class Keyboard {
 
     this.buildKeyBoard();
     this.addEventListeners();
+  }
+
+  setLang(langIndex) {
+    if (langIndex === undefined) {
+      this.currentLang = Number(window.localStorage.lang);
+    } else {
+      this.currentLang = langIndex;
+    }
+
+    window.localStorage.lang = this.currentLang;
   }
 
   buildKeyBoard() {
@@ -56,8 +66,8 @@ export default class Keyboard {
   }
 
   nextLang() {
-    this.currentLang += 1;
-    this.currentLang %= this.langList.length;
+    const lang = (this.currentLang + 1) % this.langList.length;
+    this.setLang(lang);
 
     this.keys.forEach((it) => {
       it.setLang(this.getLang());
