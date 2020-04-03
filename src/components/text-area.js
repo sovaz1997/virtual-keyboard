@@ -1,7 +1,6 @@
 export default class TextArea {
   constructor() {
     this.symbols = [];
-    this.tabLength = 4;
 
     this.createElement();
     this.updateCursor(0);
