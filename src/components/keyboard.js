@@ -107,15 +107,15 @@ export default class Keyboard {
       return;
     }
 
-    if (this.controlState.CapsLock) {
-      this.capsLockOn = true;
-    } else {
-      this.capsLockOn = false;
-    }
+    this.updateCapsLock();
 
     this.keys.forEach((it) => {
       it.setUpperCase(!!this.controlState.Shift, !!this.controlState.CapsLock);
     });
+  }
+
+  updateCapsLock() {
+    this.keyMap.CapsLock.toggleIndicator(!!this.controlState.CapsLock);
   }
 
   updateControlKeyState(key, down) {
@@ -162,6 +162,8 @@ export default class Keyboard {
     this.keyMap.ControlLeft.addModifiers('left');
     this.keyMap.Delete.addModifiers('right');
     this.keyMap.Backspace.addModifiers('right');
+
+    this.keyMap.CapsLock.addIndicator();
   }
 
   createRow1() {
