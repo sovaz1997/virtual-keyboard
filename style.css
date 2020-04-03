@@ -55,6 +55,7 @@
 
   border-radius: 50%;
   background-color: #000000;
+  transition: background-color .1s ease-out;
 }
 
 .key--indicator-on::after {
