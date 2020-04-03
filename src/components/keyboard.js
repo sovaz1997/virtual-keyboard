@@ -147,12 +147,10 @@ export default class Keyboard {
   styleKeys() {
     this.keyMap.Space.addModifiers('space');
     this.keyMap.ShiftLeft.addModifiers('shift-left', 'left');
-    this.keyMap.ShiftRight.addModifiers('shift-right', 'right');
     this.keyMap.Enter.addModifiers('enter', 'right');
     this.keyMap.Tab.addModifiers('tab', 'left');
     this.keyMap.CapsLock.addModifiers('caps-lock', 'left');
     this.keyMap.ControlLeft.addModifiers('left');
-    this.keyMap.ControlRight.addModifiers('right');
     this.keyMap.Delete.addModifiers('right');
     this.keyMap.Backspace.addModifiers('right');
   }
@@ -247,7 +245,8 @@ export default class Keyboard {
     row.append(this.appendKey('BracketRight', new Key(this.getLang(), false, { en: [']', '}'], ru: ['ъ', 'Ъ'] },
       (letter) => { this.text.addLetter(letter); })));
 
-    row.append(this.appendKey('Delete', new Key(this.getLang(), false, { en: ['Del', 'Del'], ru: ['Del', 'Del'] })));
+    row.append(this.appendKey('Delete', new Key(this.getLang(), false, { en: ['Del', 'Del'], ru: ['Del', 'Del'] },
+      () => { this.text.delete(); })));
 
     return row;
   }
@@ -346,12 +345,9 @@ export default class Keyboard {
     row.append(this.appendKey('Slash', new Key(this.getLang(), false, { en: ['/', '?'], ru: ['.', ','] },
       (letter) => { this.text.addLetter(letter); })));
 
-    row.append(this.appendKey('ShiftRight', new Key(this.getLang(), false, { en: ['Shift', 'Shift'], ru: ['Shift', 'Shift'] },
+    row.append(this.appendKey('ArrowUp', new Key(this.getLang(), false, { en: ['Up', 'Up'], ru: ['Up', 'Up'] },
       () => {
-        this.updateControlKeyState('Shift', true);
-      },
-      () => {
-        this.updateControlKeyState('Shift', false);
+        this.text.down();
       })));
 
     return row;
@@ -388,20 +384,19 @@ export default class Keyboard {
       () => { this.text.addLetter(' '); })));
 
 
-    row.append(this.appendKey('AltRight', new Key(this.getLang(), false, 'Alt',
+    row.append(this.appendKey('ArrowLeft', new Key(this.getLang(), false, { en: ['Left', 'Left'], ru: ['Left', 'Left'] },
       () => {
-        this.updateControlKeyState('Alt', true);
-      },
-      () => {
-        this.updateControlKeyState('Alt', false);
+        this.text.left();
       })));
 
-    row.append(this.appendKey('ControlRight', new Key(this.getLang(), false, 'Ctrl',
+    row.append(this.appendKey('ArrowDown', new Key(this.getLang(), false, { en: ['Down', 'Down'], ru: ['Down', 'Down'] },
       () => {
-        this.updateControlKeyState('Ctrl', true);
-      },
+        this.text.down();
+      })));
+
+    row.append(this.appendKey('ArrowRight', new Key(this.getLang(), false, { en: ['Right', 'Right'], ru: ['Right', 'Right'] },
       () => {
-        this.updateControlKeyState('Ctrl', false);
+        this.text.right();
       })));
 
     return row;

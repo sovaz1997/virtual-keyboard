@@ -6,6 +6,7 @@ export default class TextArea {
     this.createElement();
     this.updateCursor(0);
     this.render();
+    this.addEventListeners();
   }
 
   createElement() {
@@ -18,14 +19,21 @@ export default class TextArea {
   }
 
   render() {
+    const scroll = this.getScrollPosition();
     this.el.textContent = this.symbols.join('');
+    this.el.blur();
     this.el.focus();
+    this.el.scrollTo(0, scroll);
+  }
+
+  getScrollPosition() {
+    return this.el.scrollTop;
   }
 
   updateCursor(position) {
     this.cursor = position;
-    this.cursor = Math.min(0, this.cursor);
-    this.cursor = Math.max(this.symbols.length, this.cursor);
+    this.cursor = Math.max(0, this.cursor);
+    this.cursor = Math.min(this.symbols.length, this.cursor);
     this.el.selectionStart = this.cursor;
     this.el.selectionEnd = this.cursor;
   }
@@ -37,8 +45,46 @@ export default class TextArea {
   }
 
   backSpace() {
-    this.symbols.pop();
+    if (this.cursor - 1 < 0) return;
+
+    this.symbols.splice(this.cursor - 1, 1);
     this.render();
     this.updateCursor(this.cursor - 1);
+  }
+
+  delete() {
+    console.log(this.cursor);
+    this.symbols.splice(this.cursor, 1);
+    this.render();
+    this.updateCursor(this.cursor);
+  }
+
+  addEventListeners() {
+    this.el.addEventListener('click', () => {
+      this.updateCursor(this.el.selectionStart);
+    });
+
+    this.el.addEventListener('input', (e) => {
+      e.preventDefault();
+    });
+  }
+
+  left() {
+    this.render();
+    this.updateCursor(this.cursor - 1);
+  }
+
+  right() {
+    this.render();
+    this.updateCursor(this.cursor + 1);
+  }
+
+  up() {
+    this.render();
+    this.updateCursor(0);
+  }
+
+  down() {
+    this.updateCursor(this.symbols.length);
   }
 }
