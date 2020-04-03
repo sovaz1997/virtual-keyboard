@@ -33,8 +33,11 @@ export default class TextArea {
     this.cursor = position;
     this.cursor = Math.max(0, this.cursor);
     this.cursor = Math.min(this.symbols.length, this.cursor);
-    this.el.selectionStart = this.cursor;
-    this.el.selectionEnd = this.cursor;
+
+    if (this.el.selectionStart === this.el.selectionEnd) {
+      this.el.selectionStart = this.cursor;
+      this.el.selectionEnd = this.cursor;
+    }
   }
 
   addLetter(letter) {
@@ -43,27 +46,43 @@ export default class TextArea {
     this.updateCursor(this.cursor + 1);
   }
 
-  backSpace() {
-    if (this.cursor - 1 < 0) return;
+  selection() {
+    if (this.el.selectionStart === this.el.selectionEnd) {
+      return { position: this.el.selectionStart };
+    }
 
-    this.symbols.splice(this.cursor - 1, 1);
+    return { start: this.el.selectionStart, end: this.el.selectionEnd };
+  }
+
+  deleteBySelection(start, end) {
+    this.symbols.splice(start, end - start);
     this.render();
-    this.updateCursor(this.cursor - 1);
+    this.updateCursor(start);
+  }
+
+  backSpace() {
+    const selection = this.selection();
+
+    if (selection.position !== undefined) {
+      this.deleteBySelection(selection.position - 1, selection.position);
+    } else {
+      this.deleteBySelection(selection.start, selection.end + 1);
+    }
   }
 
   delete() {
-    this.symbols.splice(this.cursor, 1);
-    this.render();
-    this.updateCursor(this.cursor);
+    const selection = this.selection();
+
+    if (selection.position !== undefined) {
+      this.deleteBySelection(selection.position, selection.position + 1);
+    } else {
+      this.deleteBySelection(selection.start, selection.end + 1);
+    }
   }
 
   addEventListeners() {
     this.el.addEventListener('click', () => {
       this.updateCursor(this.el.selectionStart);
-    });
-
-    this.el.addEventListener('input', (e) => {
-      e.preventDefault();
     });
   }
 
