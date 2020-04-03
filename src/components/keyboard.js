@@ -115,7 +115,8 @@ export default class Keyboard {
   }
 
   updateCapsLock() {
-    this.keyMap.CapsLock.toggleIndicator(!!this.controlState.CapsLock);
+    this.capsLockOn = !this.capsLockOn;
+    this.keyMap.CapsLock.toggleIndicator(!!this.capsLockOn);
   }
 
   updateControlKeyState(key, down) {
