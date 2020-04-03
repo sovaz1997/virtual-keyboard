@@ -347,7 +347,7 @@ export default class Keyboard {
 
     row.append(this.appendKey('ArrowUp', new Key(this.getLang(), false, { en: ['Up', 'Up'], ru: ['Up', 'Up'] },
       () => {
-        this.text.down();
+        this.text.up();
       })));
 
     return row;
