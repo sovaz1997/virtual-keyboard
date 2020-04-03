@@ -48,18 +48,18 @@
 .key--indicator::after {
   display: block;
   content: " ";
-  width: 7px;
-  height: 7px;
+  width: 10px;
+  height: 10px;
   position: absolute;
   right: 10px;
 
   border-radius: 50%;
-  background-color: #000000;
+  background-color: rgb(142, 142, 147);
   transition: background-color .1s ease-out;
 }
 
 .key--indicator-on::after {
-  background-color: green;
+  background-color: rgb(52, 199, 89);
 }
 
 .key--caps-lock {
