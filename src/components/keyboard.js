@@ -107,8 +107,6 @@ export default class Keyboard {
       return;
     }
 
-    this.updateCapsLock();
-
     this.keys.forEach((it) => {
       it.setUpperCase(!!this.controlState.Shift, !!this.controlState.CapsLock);
     });
@@ -116,7 +114,7 @@ export default class Keyboard {
 
   updateCapsLock() {
     this.capsLockOn = !this.capsLockOn;
-    this.keyMap.CapsLock.toggleIndicator(!!this.capsLockOn);
+    this.keyMap.CapsLock.toggleIndicator(this.capsLockOn);
   }
 
   updateControlKeyState(key, down) {
@@ -137,7 +135,6 @@ export default class Keyboard {
   setDefaultControlKeyState() {
     this.controlState = {
       Ctrl: 0,
-      CapsLock: 0,
       Alt: 0,
       Shift: 0,
       Meta: 0,
@@ -268,7 +265,7 @@ export default class Keyboard {
 
     row.append(this.appendKey('CapsLock', new Key(this.getLang(), false, 'Caps Lock',
       () => {
-        this.toggleControlState('CapsLock', true);
+        this.updateCapsLock()
       })));
 
     row.append(this.appendKey('KeyA', new Key(this.getLang(), true, { en: ['a', 'A'], ru: ['ф', 'Ф'] },
