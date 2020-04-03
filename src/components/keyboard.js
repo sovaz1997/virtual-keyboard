@@ -150,13 +150,19 @@ export default class Keyboard {
 
   styleKeys() {
     this.keyMap.Space.addModifiers('space');
-    this.keyMap.ShiftLeft.addModifiers('shift-left', 'left');
-    this.keyMap.Enter.addModifiers('enter', 'right');
-    this.keyMap.Tab.addModifiers('tab', 'left');
-    this.keyMap.CapsLock.addModifiers('caps-lock', 'left');
-    this.keyMap.ControlLeft.addModifiers('left');
-    this.keyMap.Delete.addModifiers('right');
-    this.keyMap.Backspace.addModifiers('right');
+    this.keyMap.ShiftLeft.addModifiers('shift-left', 'left', 'small-text');
+    this.keyMap.Enter.addModifiers('enter', 'right', 'small-text');
+    this.keyMap.Tab.addModifiers('tab', 'left', 'small-text');
+    this.keyMap.CapsLock.addModifiers('caps-lock', 'left', 'small-text');
+    this.keyMap.ControlLeft.addModifiers('left', 'small-text');
+    this.keyMap.Delete.addModifiers('right', 'small-text');
+    this.keyMap.Backspace.addModifiers('right', 'small-text');
+    this.keyMap.ArrowUp.addModifiers('small-text');
+    this.keyMap.ArrowDown.addModifiers('small-text');
+    this.keyMap.ArrowLeft.addModifiers('small-text');
+    this.keyMap.ArrowRight.addModifiers('small-text');
+    this.keyMap.AltLeft.addModifiers('small-text');
+    this.keyMap.MetaLeft.addModifiers('small-text');
 
     this.keyMap.CapsLock.addIndicator();
   }
