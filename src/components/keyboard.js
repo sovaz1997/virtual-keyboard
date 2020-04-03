@@ -43,7 +43,16 @@ export default class Keyboard {
     this.createKeys(keys);
 
     keyboard.append(keys);
+    keyboard.append(Keyboard.renderLegend());
     this.selector.append(keyboard);
+  }
+
+  static renderLegend() {
+    const legend = document.createElement('p');
+    legend.classList.add('legend');
+
+    legend.innerHTML = '<b>Alt + Shift</b> - change language';
+    return legend;
   }
 
   addEventListeners() {
