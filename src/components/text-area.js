@@ -55,6 +55,8 @@ export default class TextArea {
   }
 
   deleteBySelection(start, end) {
+    if (start < 0) return;
+
     this.symbols.splice(start, end - start);
     this.render();
     this.updateCursor(start);

@@ -51,7 +51,7 @@ export default class Keyboard {
     const legend = document.createElement('p');
     legend.classList.add('legend');
 
-    legend.innerHTML = '<b>Alt + Shift</b> - change language';
+    legend.innerHTML = '<b>Ctrl + Space</b> - change language';
     return legend;
   }
 
@@ -101,12 +101,12 @@ export default class Keyboard {
     return key.element;
   }
 
-  updateKeyboardState() {
-    if (this.controlState.Shift && this.controlState.Alt) {
-      this.nextLang();
-      return;
-    }
+  updateLang() {
+    this.nextLang();
+    this.updateKeyboardState();
+  }
 
+  updateKeyboardState() {
     this.keys.forEach((it) => {
       it.setUpperCase(!!this.controlState.Shift, this.capsLockOn);
     });
@@ -134,6 +134,7 @@ export default class Keyboard {
       Alt: 0,
       Shift: 0,
       Meta: 0,
+      Space: 0,
     };
   }
 
@@ -386,8 +387,13 @@ export default class Keyboard {
       })));
 
     row.append(this.appendKey('Space', new Key(this.getLang(), false, { en: ['Space', 'Space'], ru: ['Space', 'Space'] },
-      () => { this.text.addLetter(' '); })));
-
+      () => {
+        if (this.controlState.Ctrl) {
+          this.updateLang();
+        } else {
+          this.text.addLetter(' ');
+        }
+      })));
 
     row.append(this.appendKey('ArrowLeft', new Key(this.getLang(), false, { en: ['Left', 'Left'], ru: ['Left', 'Left'] },
       () => {
