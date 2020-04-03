@@ -53,7 +53,6 @@ export default class TextArea {
   }
 
   delete() {
-    console.log(this.cursor);
     this.symbols.splice(this.cursor, 1);
     this.render();
     this.updateCursor(this.cursor);
