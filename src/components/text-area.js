@@ -41,6 +41,8 @@ export default class TextArea {
   }
 
   addLetter(letter) {
+    this.deleteBySelection(this.el.selectionStart, this.el.selectionEnd);
+
     this.symbols.splice(this.cursor, 0, letter);
     this.render();
     this.updateCursor(this.cursor + 1);
