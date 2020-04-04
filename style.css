@@ -98,6 +98,12 @@ body {
   resize: none;
   height: 300px;
   font-size: 18px;
+  font-family: 'Comfortaa', Arial, sans-serif;
+  padding: 7px;
+  border: none;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.41);
+  margin-bottom: 20px;
+  outline: none;
 }
 
 .key--left {
