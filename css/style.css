@@ -210,3 +210,7 @@ body {
 .key--down.key--icon-space {
   background-image: url('../assets/keyboard_space--light.svg');
 }
+
+.legend {
+  user-select: none;
+}
