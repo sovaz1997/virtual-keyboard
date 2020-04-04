@@ -85,9 +85,12 @@ export default class TextArea {
   }
 
   addEventListeners() {
-    this.el.addEventListener('click', () => {
+    this.el.addEventListener('click', (e) => {
+      e.preventDefault();
       this.updateCursor(this.el.selectionStart);
     });
+
+    this.el.addEventListener('contextmenu', (e) => { e.preventDefault(); });
   }
 
   left() {

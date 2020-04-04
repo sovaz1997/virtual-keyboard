@@ -83,6 +83,7 @@ export default class Key {
     if (!this.pressed) return;
 
     this.pressed = false;
+
     this.render();
     if (this.upCb !== undefined) {
       this.upCb(this.text);
