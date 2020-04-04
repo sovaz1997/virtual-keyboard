@@ -18,8 +18,8 @@ module.exports = (env, options) => {
     },
     plugins: [
       new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({template: 'index.html'}),
-      new MiniCssExtractPlugin({filename: 'style.css'}),
+      new HtmlWebpackPlugin({ template: 'index.html' }),
+      new MiniCssExtractPlugin({ filename: 'style.css' }),
     ],
     module: {
       rules: [
@@ -40,6 +40,14 @@ module.exports = (env, options) => {
         {
           test: /\.css$/i,
           use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+            },
+          ],
         },
       ],
     },

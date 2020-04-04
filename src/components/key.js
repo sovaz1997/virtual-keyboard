@@ -60,7 +60,15 @@ export default class Key {
     this.render();
   }
 
+  setIcon(icon) {
+    this.icon = true;
+    this.addModifiers('icon', `icon-${icon}`);
+    this.render();
+  }
+
   get text() {
+    if (this.icon) return '';
+
     if (this.simpleKey) {
       return this.keyState;
     }

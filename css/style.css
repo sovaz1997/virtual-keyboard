@@ -1,3 +1,7 @@
+body {
+  font-family: 'Comfortaa', Arial, sans-serif;
+}
+
 :root {
   --key-size: 50px;
   --key-gap: 7px;
@@ -33,6 +37,7 @@
   font-size: 20px;
   transition: all .1s ease-out;
   user-select: none;
+  font-family: 'Comfortaa', Arial, sans-serif;
 }
 
 .key:hover {
@@ -101,4 +106,101 @@
 
 .key--right {
   justify-content: flex-end;
+}
+
+.key--icon {
+  background-repeat: no-repeat;
+  background-size: auto 20px;
+  background-position: center;
+}
+
+.key--icon.key--left {
+  background-position: 10px center;
+}
+
+.key--icon.key--right {
+  background-position:  calc(100% - 10px) center;
+}
+
+.key--icon-shift {
+  background-image: url('../assets/keyboard_shift.svg');
+}
+
+.key--icon-capslock {
+  background-image: url('../assets/keyboard_capslock.svg');
+}
+
+.key--icon-backspace {
+  background-image: url('../assets/keyboard_backspace.svg');
+}
+
+.key--icon-enter {
+  background-image: url('../assets/keyboard_return.svg');
+}
+
+.key--icon-up {
+  background-image: url('../assets/keyboard_arrow_up.svg');
+}
+
+.key--icon-down {
+  background-image: url('../assets/keyboard_arrow_down.svg');
+}
+
+.key--icon-left {
+  background-image: url('../assets/keyboard_arrow_left.svg');
+}
+
+.key--icon-right {
+  background-image: url('../assets/keyboard_arrow_right.svg');
+}
+
+.key--icon-tab {
+  background-image: url('../assets/keyboard_tab.svg');
+}
+
+.key--icon-space {
+  background-image: url('../assets/keyboard_space.svg');
+}
+
+
+
+
+.key--down.key--icon-shift {
+  background-image: url('../assets/keyboard_shift.svg');
+}
+
+.key--down.key--icon-capslock {
+  background-image: url('../assets/keyboard_capslock.svg');
+}
+
+.key--down.key--icon-backspace {
+  background-image: url('../assets/keyboard_backspace.svg');
+}
+
+.key--down.key--icon-enter {
+  background-image: url('../assets/keyboard_return.svg');
+}
+
+.key--down.key--icon-up {
+  background-image: url('../assets/keyboard_arrow_up.svg');
+}
+
+.key--down.key--icon-down {
+  background-image: url('../assets/keyboard_arrow_down.svg');
+}
+
+.key--down.key--icon-left {
+  background-image: url('../assets/keyboard_arrow_left.svg');
+}
+
+.key--down.key--icon-right {
+  background-image: url('../assets/keyboard_arrow_right.svg');
+}
+
+.key--down.key--icon-tab {
+  background-image: url('../assets/keyboard_tab.svg');
+}
+
+.key--down.key--icon-space {
+  background-image: url('../assets/keyboard_space.svg');
 }

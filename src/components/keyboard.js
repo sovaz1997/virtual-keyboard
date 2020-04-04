@@ -161,6 +161,21 @@ export default class Keyboard {
     this.keyMap.MetaLeft.addModifiers('small-text');
 
     this.keyMap.CapsLock.addIndicator();
+
+    this.setKeyIcons();
+  }
+
+  setKeyIcons() {
+    this.keyMap.ShiftLeft.setIcon('shift');
+    this.keyMap.CapsLock.setIcon('capslock');
+    this.keyMap.Backspace.setIcon('backspace');
+    this.keyMap.Enter.setIcon('enter');
+    this.keyMap.ArrowUp.setIcon('up');
+    this.keyMap.ArrowDown.setIcon('down');
+    this.keyMap.ArrowLeft.setIcon('left');
+    this.keyMap.ArrowRight.setIcon('right');
+    this.keyMap.Tab.setIcon('tab');
+    this.keyMap.Space.setIcon('space');
   }
 
   createRow1() {
