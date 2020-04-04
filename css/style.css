@@ -1,0 +1,212 @@
+body {
+  font-family: 'Comfortaa', Arial, sans-serif;
+}
+
+:root {
+  --key-size: 50px;
+  --key-gap: 7px;
+}
+
+.keyboard {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  margin-right: calc(var(--key-gap) * -1);
+  margin-bottom: var(--key-gap);
+}
+
+.key {
+  flex-basis: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  border: none;
+  flex-grow: 1;
+  height: var(--key-size);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.41);
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-right: var(--key-gap);
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 20px;
+  transition: all .1s ease-out;
+  user-select: none;
+  font-family: 'Comfortaa', Arial, sans-serif;
+}
+
+.key:hover {
+  background-color: rgb(242, 242, 247);
+  box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.41);
+}
+
+.key.key--down {
+  background-color: rgb(0, 122, 255);
+  box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.41);
+  color: #ffffff;
+}
+
+.key--indicator::after {
+  display: block;
+  content: " ";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 10px;
+
+  border-radius: 50%;
+  background-color: rgb(142, 142, 147);
+  transition: all .3s ease-out;
+}
+
+.key--indicator-on::after {
+  background-color: rgb(255, 149, 0);
+}
+
+.key--small-text {
+  font-size: 14px;
+}
+
+.key--caps-lock {
+  flex-basis: 120px;
+}
+.key--enter {
+  flex-basis: 120px;
+}
+
+.key--tab {
+  flex-basis: 100px;
+}
+
+.key--space {
+  flex-grow: 5;
+  flex-basis: 400px;
+}
+
+.key--shift-left {
+  flex-basis: 80px;
+}
+
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: none;
+  height: 300px;
+  font-size: 18px;
+  font-family: 'Comfortaa', Arial, sans-serif;
+  padding: 7px;
+  border: none;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.41);
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.key--left {
+  justify-content: flex-start;
+}
+
+.key--right {
+  justify-content: flex-end;
+}
+
+.key--icon {
+  background-repeat: no-repeat;
+  background-size: auto 20px;
+  background-position: center;
+}
+
+.key--icon.key--left {
+  background-position: 10px center;
+}
+
+.key--icon.key--right {
+  background-position:  calc(100% - 10px) center;
+}
+
+.key--icon-shift {
+  background-image: url('../assets/keyboard_shift.svg');
+}
+
+.key--icon-capslock {
+  background-image: url('../assets/keyboard_capslock.svg');
+}
+
+.key--icon-backspace {
+  background-image: url('../assets/keyboard_backspace.svg');
+}
+
+.key--icon-enter {
+  background-image: url('../assets/keyboard_return.svg');
+}
+
+.key--icon-up {
+  background-image: url('../assets/keyboard_arrow_up.svg');
+}
+
+.key--icon-down {
+  background-image: url('../assets/keyboard_arrow_down.svg');
+}
+
+.key--icon-left {
+  background-image: url('../assets/keyboard_arrow_left.svg');
+}
+
+.key--icon-right {
+  background-image: url('../assets/keyboard_arrow_right.svg');
+}
+
+.key--icon-tab {
+  background-image: url('../assets/keyboard_tab.svg');
+}
+
+.key--icon-space {
+  background-image: url('../assets/keyboard_space.svg');
+}
+
+
+
+
+.key--down.key--icon-shift {
+  background-image: url('../assets/keyboard_shift--light.svg');
+}
+
+.key--down.key--icon-capslock {
+  background-image: url('../assets/keyboard_capslock--light.svg');
+}
+
+.key--down.key--icon-backspace {
+  background-image: url('../assets/keyboard_backspace--light.svg');
+}
+
+.key--down.key--icon-enter {
+  background-image: url('../assets/keyboard_return--light.svg');
+}
+
+.key--down.key--icon-up {
+  background-image: url('../assets/keyboard_arrow_up--light.svg');
+}
+
+.key--down.key--icon-down {
+  background-image: url('../assets/keyboard_arrow_down--light.svg');
+}
+
+.key--down.key--icon-left {
+  background-image: url('../assets/keyboard_arrow_left--light.svg');
+}
+
+.key--down.key--icon-right {
+  background-image: url('../assets/keyboard_arrow_right--light.svg');
+}
+
+.key--down.key--icon-tab {
+  background-image: url('../assets/keyboard_tab--light.svg');
+}
+
+.key--down.key--icon-space {
+  background-image: url('../assets/keyboard_space--light.svg');
+}
