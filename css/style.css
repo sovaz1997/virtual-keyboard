@@ -166,41 +166,41 @@ body {
 
 
 .key--down.key--icon-shift {
-  background-image: url('../assets/keyboard_shift.svg');
+  background-image: url('../assets/keyboard_shift--light.svg');
 }
 
 .key--down.key--icon-capslock {
-  background-image: url('../assets/keyboard_capslock.svg');
+  background-image: url('../assets/keyboard_capslock--light.svg');
 }
 
 .key--down.key--icon-backspace {
-  background-image: url('../assets/keyboard_backspace.svg');
+  background-image: url('../assets/keyboard_backspace--light.svg');
 }
 
 .key--down.key--icon-enter {
-  background-image: url('../assets/keyboard_return.svg');
+  background-image: url('../assets/keyboard_return--light.svg');
 }
 
 .key--down.key--icon-up {
-  background-image: url('../assets/keyboard_arrow_up.svg');
+  background-image: url('../assets/keyboard_arrow_up--light.svg');
 }
 
 .key--down.key--icon-down {
-  background-image: url('../assets/keyboard_arrow_down.svg');
+  background-image: url('../assets/keyboard_arrow_down--light.svg');
 }
 
 .key--down.key--icon-left {
-  background-image: url('../assets/keyboard_arrow_left.svg');
+  background-image: url('../assets/keyboard_arrow_left--light.svg');
 }
 
 .key--down.key--icon-right {
-  background-image: url('../assets/keyboard_arrow_right.svg');
+  background-image: url('../assets/keyboard_arrow_right--light.svg');
 }
 
 .key--down.key--icon-tab {
-  background-image: url('../assets/keyboard_tab.svg');
+  background-image: url('../assets/keyboard_tab--light.svg');
 }
 
 .key--down.key--icon-space {
-  background-image: url('../assets/keyboard_space.svg');
+  background-image: url('../assets/keyboard_space--light.svg');
 }
