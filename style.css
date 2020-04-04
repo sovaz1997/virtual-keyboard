@@ -1,3 +1,7 @@
+body {
+  font-family: 'Comfortaa', Arial, sans-serif;
+}
+
 :root {
   --key-size: 50px;
   --key-gap: 7px;
@@ -33,6 +37,7 @@
   font-size: 20px;
   transition: all .1s ease-out;
   user-select: none;
+  font-family: 'Comfortaa', Arial, sans-serif;
 }
 
 .key:hover {
@@ -101,4 +106,101 @@
 
 .key--right {
   justify-content: flex-end;
+}
+
+.key--icon {
+  background-repeat: no-repeat;
+  background-size: auto 20px;
+  background-position: center;
+}
+
+.key--icon.key--left {
+  background-position: 10px center;
+}
+
+.key--icon.key--right {
+  background-position:  calc(100% - 10px) center;
+}
+
+.key--icon-shift {
+  background-image: url(b500f5b4b9eef60beea2d4d39276d4da.svg);
+}
+
+.key--icon-capslock {
+  background-image: url(744c184862a3665b14c21aa3e770f275.svg);
+}
+
+.key--icon-backspace {
+  background-image: url(00576a6deccf8fb65068c2c8f0a5fc90.svg);
+}
+
+.key--icon-enter {
+  background-image: url(cfad95d903848715986c69a26f09c774.svg);
+}
+
+.key--icon-up {
+  background-image: url(0878b74a8e40721bf134ddb28ac28069.svg);
+}
+
+.key--icon-down {
+  background-image: url(8dca4bf41f2fcd0739d3361834848ad0.svg);
+}
+
+.key--icon-left {
+  background-image: url(6454f0c8179a4afb5ceed1d57d3ceae3.svg);
+}
+
+.key--icon-right {
+  background-image: url(a957a48b897c61af7473fe3a7fe75df1.svg);
+}
+
+.key--icon-tab {
+  background-image: url(67ff2d257a86a703db42c037c5a18331.svg);
+}
+
+.key--icon-space {
+  background-image: url(5f00ef460b8b8402eb00bdbc13472499.svg);
+}
+
+
+
+
+.key--down.key--icon-shift {
+  background-image: url(3d651757eb21d7d7bc333e8aa78f3922.svg);
+}
+
+.key--down.key--icon-capslock {
+  background-image: url(67b1ea7588f5b489291d43977efdc9f8.svg);
+}
+
+.key--down.key--icon-backspace {
+  background-image: url(3276336aa7dad0763bf276c4f59ba20c.svg);
+}
+
+.key--down.key--icon-enter {
+  background-image: url(4a6d8d28596725c41f272ab307df1041.svg);
+}
+
+.key--down.key--icon-up {
+  background-image: url(e21d77b91876c32edb75a312c13a0166.svg);
+}
+
+.key--down.key--icon-down {
+  background-image: url(e0d711f3def6af69881fadf239330e6a.svg);
+}
+
+.key--down.key--icon-left {
+  background-image: url(d14c79a9c57583360ca33914fd670295.svg);
+}
+
+.key--down.key--icon-right {
+  background-image: url(1b15b9c081e2e4bb47660c73ee944022.svg);
+}
+
+.key--down.key--icon-tab {
+  background-image: url(f8232632e5104517efb0f2c746f1726d.svg);
+}
+
+.key--down.key--icon-space {
+  background-image: url(4bf272c6845c4476fb8a92cabbff80ce.svg);
 }
