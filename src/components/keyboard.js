@@ -61,12 +61,6 @@ export default class Keyboard {
       const keyObject = this.keyMap[e.code];
       if (keyObject !== undefined) {
         keyObject.down();
-
-        /*
-        if (e.repeat && !keyObject.simpleKey) {
-          keyObject.up();
-        }
-        */
       }
     });
 
