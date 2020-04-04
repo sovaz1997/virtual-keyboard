@@ -85,7 +85,7 @@ export default class TextArea {
   }
 
   addEventListeners() {
-    this.el.addEventListener('click', (e) => {
+    this.el.addEventListener('click', () => {
       this.updateCursor(this.el.selectionStart);
     });
 
