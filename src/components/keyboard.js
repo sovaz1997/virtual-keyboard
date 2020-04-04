@@ -152,7 +152,7 @@ export default class Keyboard {
     this.keyMap.CapsLock.addModifiers('caps-lock', 'left', 'small-text');
     this.keyMap.ControlLeft.addModifiers('left', 'small-text');
     this.keyMap.Delete.addModifiers('right', 'small-text');
-    this.keyMap.Backspace.addModifiers('right', 'small-text');
+    this.keyMap.Backspace.addModifiers('right', 'small-text', 'caps-lock');
     this.keyMap.ArrowUp.addModifiers('small-text');
     this.keyMap.ArrowDown.addModifiers('small-text');
     this.keyMap.ArrowLeft.addModifiers('small-text');
