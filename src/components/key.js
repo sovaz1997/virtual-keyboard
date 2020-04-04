@@ -6,8 +6,10 @@ export default class Key {
     this.simpleKey = (typeof keyState === 'string');
 
     this.lang = lang;
-    this.upperCase = false;
     this.pressed = false;
+
+    this.shift = false;
+    this.capsLock = false;
 
     this.downCb = downCb;
     this.upCb = upCb;
@@ -40,13 +42,8 @@ export default class Key {
   }
 
   setUpperCase(shift, capsLock) {
-    let upperCase = shift;
-
-    if (this.isLetter && capsLock) {
-      upperCase = !upperCase;
-    }
-
-    this.upperCase = upperCase;
+    this.shift = shift;
+    this.capsLock = capsLock;
     this.render();
   }
 
@@ -73,7 +70,23 @@ export default class Key {
       return this.keyState;
     }
 
-    return this.keyState[this.lang][+this.upperCase];
+    const letter = this.keyState[this.lang][+this.shift];
+
+    if (letter.length !== 1) {
+      return letter;
+    }
+
+    const isUpperCase = (letter === letter.toUpperCase());
+
+    if (this.capsLock) {
+      if (isUpperCase) {
+        return letter.toLowerCase();
+      }
+
+      return letter.toUpperCase();
+    }
+
+    return letter;
   }
 
   down() {
