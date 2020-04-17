@@ -22,11 +22,8 @@ export default class Keyboard {
       window.localStorage.lang = 0;
     }
 
-    if (langIndex === undefined) {
-      this.currentLang = Number(window.localStorage.lang);
-    } else {
-      this.currentLang = langIndex;
-    }
+    if (langIndex === undefined) this.currentLang = Number(window.localStorage.lang);
+    else this.currentLang = langIndex;
 
     window.localStorage.lang = this.currentLang;
   }
@@ -35,7 +32,7 @@ export default class Keyboard {
     const keyboard = document.createElement('div');
     keyboard.classList.add('keyboard');
 
-    keyboard.append(this.text.element);
+    keyboard.append(this.text.el);
 
     const keys = document.createElement('div');
     keys.classList.add('keys');
@@ -59,9 +56,8 @@ export default class Keyboard {
     document.addEventListener('keydown', (e) => {
       e.preventDefault();
       const keyObject = this.keyMap[e.code];
-      if (keyObject !== undefined) {
-        keyObject.down();
-      }
+
+      if (keyObject) keyObject.down();
     });
 
     document.addEventListener('keyup', (e) => {
@@ -83,18 +79,13 @@ export default class Keyboard {
     });
   }
 
-  getLang() {
-    return this.langList[this.currentLang];
-  }
-
-  bindKey(keyCode, keyObject) {
-    this.keyMap[keyCode] = keyObject;
-    this.keys.push(keyObject);
-  }
+  getLang = () => this.langList[this.currentLang];
 
   appendKey(keyCode, key) {
-    this.bindKey(keyCode, key);
-    return key.element;
+    this.keyMap[keyCode] = key;
+    this.keys.push(key);
+
+    return key.el;
   }
 
   updateLang() {
@@ -115,11 +106,8 @@ export default class Keyboard {
   }
 
   updateControlKeyState(key, down) {
-    if (down) {
-      this.controlState[key] += 1;
-    } else {
-      this.controlState[key] -= 1;
-    }
+    if (down) this.controlState[key] += 1;
+    else this.controlState[key] -= 1;
 
     this.updateKeyboardState();
   }

@@ -13,10 +13,6 @@ export default class TextArea {
     this.el.classList.add('textarea');
   }
 
-  get element() {
-    return this.el;
-  }
-
   render() {
     const scroll = this.getScrollPosition();
     this.el.textContent = this.symbols.join('');

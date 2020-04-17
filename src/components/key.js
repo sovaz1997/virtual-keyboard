@@ -37,10 +37,6 @@ export default class Key {
     this.el.classList.toggle(Key.modifierClass('indicator-on', value));
   }
 
-  get element() {
-    return this.el;
-  }
-
   setUpperCase(shift, capsLock) {
     this.shift = shift;
     this.capsLock = capsLock;
@@ -66,22 +62,16 @@ export default class Key {
   get text() {
     if (this.icon) return '';
 
-    if (this.simpleKey) {
-      return this.keyState;
-    }
+    if (this.simpleKey) return this.keyState;
 
-    const letter = this.keyState[this.lang][+this.shift];
+    const letter = this.keyState[this.lang][Number(this.shift)];
 
-    if (letter.length !== 1) {
-      return letter;
-    }
+    if (letter.length !== 1) return letter;
 
     const isUpperCase = (letter === letter.toUpperCase());
 
     if (this.capsLock) {
-      if (isUpperCase) {
-        return letter.toLowerCase();
-      }
+      if (isUpperCase) return letter.toLowerCase();
 
       return letter.toUpperCase();
     }
@@ -95,9 +85,7 @@ export default class Key {
     this.pressed = true;
     this.render();
 
-    if (this.downCb !== undefined) {
-      this.downCb(this.text);
-    }
+    if (this.downCb) this.downCb(this.text);
   }
 
   up() {
@@ -105,9 +93,7 @@ export default class Key {
     this.pressed = false;
 
     this.render();
-    if (this.upCb !== undefined) {
-      this.upCb(this.text);
-    }
+    if (this.upCb) this.upCb(this.text);
   }
 
   addClickEvents() {
@@ -127,7 +113,5 @@ export default class Key {
     this.el.classList.add(...modifiers.map((el) => Key.modifierClass(el)));
   }
 
-  static modifierClass(value) {
-    return `key--${value}`;
-  }
+  static modifierClass = (value) => `key--${value}`;
 }
