@@ -10,14 +10,14 @@ module.exports = (env, options) => {
 
   const config = {
     mode: isProduction ? 'production' : 'development',
-    devtool: isProduction ? 'none' : 'source-map',
     watch: !isProduction,
     entry: ['./src/index.js', './index.html', './css/style.css'],
 
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'main.js',
+      filename: 'bundle.js',
     },
+    devtool: !env || !isProduction ? 'source-map' : '',
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({ template: 'index.html' }),
@@ -38,14 +38,9 @@ module.exports = (env, options) => {
           loader: 'html-loader',
         },
         {
-          test: /\.m?js$/,
+          test: /\.js$/,
           exclude: /node_modules/,
-          use: [{
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env'],
-            },
-          }, 'eslint-loader'],
+          use: ['babel-loader', 'eslint-loader'],
         },
         {
           test: /\.css$/i,
